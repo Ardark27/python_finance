@@ -20,6 +20,6 @@ def añade_cruces(data):
                           prepend=False)
     lower_cross = np.diff(data.loc[:, "close"] < data.loc[:, "lower_band"],
                           prepend=False)
-    data.loc["upper_cross"] = upper_cross
-    data.loc["lower_cross"] = lower_cross
+    data["upper_cross"] = upper_cross
+    data["lower_cross"] = lower_cross
     return data
