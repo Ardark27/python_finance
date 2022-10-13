@@ -56,6 +56,11 @@ def generate_mc(s0, r, sigma, q, nsims, steps, T, seed=None):
     msim = np.cumprod(msim, 1)
     return msim
 
+def get_implied_vol(sigma0, opt_value, s0, K, r, q, T, opt_type):
+    f_error = lambda sigma, opt_value, s0, K, r, q, T, opt_type: abs(bls_option_price(s0, K, r, sigma, q, T, opt_type) - opt_value)
+    res = fsolve(f_error, sigma0, args=(opt_value, s0, K, r, q, T, opt_type))
+                                                                     
+    return res[0]
 
 def bls_option_price(s0, K, r, sigma, q, T, opt_type: str='call'):
     """
